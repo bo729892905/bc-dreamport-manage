@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>用户名</th><th>电话号</th>
+    </tr>
+    <%
+        for(user in userList){
+    %>
+    <tr>
+        <td>${user.username}</td>
+        <td>${user.mobilePhone}</td>
+    </tr>
+    <%}%>
+
+</table>
+</body>
+</html>
