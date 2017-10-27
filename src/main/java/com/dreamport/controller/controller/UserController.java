@@ -1,5 +1,6 @@
 package com.dreamport.controller.controller;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.dreamport.annotation.OperateLog;
 import com.dreamport.bo.UserBO;
 import com.dreamport.common.log.LogModule;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,10 +32,10 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView list(UserBO param) {
+    public ModelAndView list(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize, UserBO param) {
         ModelAndView view = new ModelAndView("/users/list");
-        List<User> userList = userService.list(param);
-        view.addObject("userList", userList);
+        Page<User> userPage = userService.selectUserPage(pageNo, pageSize, param);
+        view.addObject("userList", userPage.getRecords());
         return view;
     }
 

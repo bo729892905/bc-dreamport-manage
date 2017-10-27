@@ -4,7 +4,7 @@ server:
 
 eureka:
   instance:
-    instanceId: ${spring.cloud.client.hostname}:${server.port}
+    instanceId: ${spring.application.name}:${random.int(10000,19999)}
     preferIpAddress: true
   client:
     registerWithEureka: false
@@ -32,3 +32,12 @@ hystrix:
 
 beetl:
   templatesPath: templates
+
+# actuator 安全性配置
+security:
+  basic:
+    enabled:  true
+    path: /admin
+  user:
+    name: admin
+    password: admin
